@@ -19,7 +19,6 @@ class CreateLocationsTable extends Migration
             $table->integer('min_zoom');
             $table->text('clue');
             $table->integer('order');
-            $table->integer('jin')->unsigned();
         });
     }
 
