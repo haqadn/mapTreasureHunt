@@ -5,6 +5,11 @@
 
         <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
         <link href="asset/css/app.css" rel="stylesheet" type="text/css">
+        
+        @section('scripts')
+        <!-- Bootstrap JS -->
+        <script src="asset/js/bootstrap.min.js"></script>
+        @show
 
     </head>
     <body>

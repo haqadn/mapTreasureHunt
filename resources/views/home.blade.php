@@ -2,6 +2,11 @@
 
 @section('title', trans('pages.home'))
 
+@section('scripts')
+	@parent
+
+@endsection
+
 @section('content')
-<p>Home data</p>
+
 @endsection
