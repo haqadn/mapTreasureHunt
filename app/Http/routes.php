@@ -17,6 +17,14 @@ Route::group(['middleware' => ['web']], function () {
         return view('home');
     })->name('home');
 
+    Route::get('game', function () {
+        return view('game');
+    })->name('game');
+
+    Route::get('ranklist', function () {
+        return view('ranklist');
+    })->name('ranklist');
+
     Route::get('help', function () {
         return view('help');
     })->name('help');

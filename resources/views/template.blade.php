@@ -27,11 +27,11 @@
                     </button>
                     <a class="navbar-brand" href="{{ config('app.url') }}">{{ config('app.title') }}</a>
                 </div>
-                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-8">
+                <div class="collapse navbar-collapse" id="primary-navigation">
                     <ul class="nav navbar-nav">
                         <li class="{{active_class('home')}}"><a href="{{ route('home') }}">{{ trans('pages.home') }}</a></li>
-                        <li class="{{active_class('game')}}"><a href="{{ route('home') }}">{{ trans('pages.game') }}</a></li>
-                        <li class="{{active_class('ranklist')}}"><a href="{{ route('home') }}">{{ trans( 'pages.ranklist' ) }}</a></li>
+                        <li class="{{active_class('game')}}"><a href="{{ route('game') }}">{{ trans('pages.game') }}</a></li>
+                        <li class="{{active_class('ranklist')}}"><a href="{{ route('ranklist') }}">{{ trans( 'pages.ranklist' ) }}</a></li>
                         <li class="{{active_class('help')}}"><a href="{{ route('help') }}">{{ trans( 'pages.help' ) }}</a></li>
                     </ul>
                 </div>
