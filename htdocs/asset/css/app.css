@@ -5765,6 +5765,9 @@ nav.navbar {
   height: 90px;
   width: 150px; }
 
+.navbar-toggle {
+  margin-top: 25px; }
+
 .navbar-nav > li > a {
   line-height: 60px; }
 
