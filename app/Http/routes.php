@@ -17,4 +17,8 @@ Route::group(['middleware' => ['web']], function () {
         return view('home');
     })->name('home');
 
+    Route::get('help', function () {
+        return view('help');
+    })->name('help');
+
 });

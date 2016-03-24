@@ -5749,4 +5749,22 @@ button.close {
   .hidden-print {
     display: none !important; } }
 
+html, body {
+  height: 100%; }
+
+body {
+  background-image: url(../images/gold-coins.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed; }
+
+nav.navbar {
+  margin: 0; }
+
+.content {
+  padding: 20px; }
+
+.transparent-white {
+  background-color: rgba(255, 255, 255, 0.9); }
+
 /*# sourceMappingURL=app.css.map */

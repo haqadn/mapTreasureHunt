@@ -1,6 +1,6 @@
 @extends('template')
 
-@section('title', 'Home')
+@section('title', trans('pages.home'))
 
 @section('content')
 <p>Home data</p>

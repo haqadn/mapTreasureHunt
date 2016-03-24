@@ -21,14 +21,16 @@
                 </div>
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-8">
                     <ul class="nav navbar-nav">
-                        <li class="{{active_class('home')}}"><a href="{{ route('home') }}">Home</a></li>
-                        <li class="{{active_class('game')}}"><a href="{{ route('home') }}">Game</a></li>
-                        <li class="{{active_class('leaderboard')}}"><a href="{{ route('home') }}">Leaderboard</a></li>
-                        <li class="{{active_class('help')}}"><a href="{{ route('home') }}">Help</a></li>
+                        <li class="{{active_class('home')}}"><a href="{{ route('home') }}">{{ trans('pages.home') }}</a></li>
+                        <li class="{{active_class('game')}}"><a href="{{ route('home') }}">{{ trans('pages.game') }}</a></li>
+                        <li class="{{active_class('ranklist')}}"><a href="{{ route('home') }}">{{ trans( 'pages.ranklist' ) }}</a></li>
+                        <li class="{{active_class('help')}}"><a href="{{ route('help') }}">{{ trans( 'pages.help' ) }}</a></li>
                     </ul>
                 </div>
             </div>
         </nav>
+        <div class="content">
         @yield( 'content' )
+        </div>
     </body>
 </html>
