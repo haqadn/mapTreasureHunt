@@ -15,4 +15,5 @@ elixir(function(mix) {
     mix.sass('app.scss', 'htdocs/asset/css');
     mix.copy('node_modules/bootstrap-sass/assets/fonts', 'htdocs/asset/fonts');
     mix.copy('node_modules/bootstrap-sass/assets/javascripts/bootstrap.min.js', 'htdocs/asset/js/');
+    mix.copy('node_modules/jquery/dist/jquery.min.js', 'htdocs/asset/js/');
 });

@@ -7,6 +7,9 @@
         <link href="asset/css/app.css" rel="stylesheet" type="text/css">
         
         @section('scripts')
+        <!-- jQuery -->
+        <script src="asset/js/jquery.min.js"></script>
+
         <!-- Bootstrap JS -->
         <script src="asset/js/bootstrap.min.js"></script>
         @show

@@ -5,6 +5,8 @@
   },
   "dependencies": {
     "laravel-elixir": "^4.0.0",
-    "bootstrap-sass": "^3.0.0"
+    "bootstrap-sass": "^3.0.0",
+    "google-maps": "^3.2.1",
+    "jquery": "^1.12"
   }
 }
