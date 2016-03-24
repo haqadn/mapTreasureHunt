@@ -5761,6 +5761,16 @@ body {
 nav.navbar {
   margin: 0; }
 
+.navbar-brand {
+  height: 90px;
+  width: 150px; }
+
+.navbar-nav > li > a {
+  line-height: 60px; }
+
+.logo {
+  width: 120px; }
+
 .content {
   padding: 20px;
   color: white; }

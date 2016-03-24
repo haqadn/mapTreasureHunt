@@ -17,7 +17,7 @@
     </head>
     <body>
         <nav class="navbar navbar-default navbar-static-top  navbar-inverse">
-            <div class="container-fluid">
+            <div class="container">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#primary-navigation" aria-expanded="false">
                         <span class="sr-only">Toggle navigation</span>
@@ -25,7 +25,9 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="{{ config('app.url') }}">{{ config('app.title') }}</a>
+                    <a class="navbar-brand" href="{{ config('app.url') }}">
+                        <img src="asset/images/th-logo.png" alt="{{ config('app.title') }}" class="logo">
+                    </a>
                 </div>
                 <div class="collapse navbar-collapse" id="primary-navigation">
                     <ul class="nav navbar-nav">
