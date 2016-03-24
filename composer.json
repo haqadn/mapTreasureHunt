@@ -1,7 +1,7 @@
 {
-    "name": "laravel/laravel",
-    "description": "The Laravel Framework.",
-    "keywords": ["framework", "laravel"],
+    "name": "eAdnan007/mapTreasureHunt",
+    "description": "An online treasure hunt game that uses map and asks questions.",
+    "keywords": ["game", "laravel", "treasurehunt", "map"],
     "license": "MIT",
     "type": "project",
     "require": {
