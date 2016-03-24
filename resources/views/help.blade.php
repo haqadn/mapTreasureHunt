@@ -3,7 +3,7 @@
 @section('title', trans('page.help'))
 
 @section('content')
-<div class="container transparent-white">
+<div class="container transparent-bg">
 	<div class="col-xs-12">
 		<article>
 			<h1>{{ trans('pages.help') }}</h1>

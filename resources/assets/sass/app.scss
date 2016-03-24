@@ -17,8 +17,22 @@ nav.navbar {
 
 .content {
 	padding: 20px;
+	color: white;
 }
 
-.transparent-white {
-	background-color: rgba(255,255,255,0.9);
+.transparent-bg {
+	background-color: rgba(0, 0, 0,0.7);
+}
+
+.countdown {
+	
+	> div {
+		font-size: 30px;
+	}
+
+	.counter {
+		clear: both;
+		display: block;
+	}
+
 }
