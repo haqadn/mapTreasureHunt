@@ -6,3 +6,5 @@ Homestead.json
 .env
 .DS_Store
 */.DS_Store
+config.codekit
+.sass-cache
