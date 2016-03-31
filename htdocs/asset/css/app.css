@@ -5749,6 +5749,9 @@ button.close {
   .hidden-print {
     display: none !important; } }
 
+/* ==================================================
+	App CSS
+   ================================================== */
 html, body {
   height: 100%; }
 
@@ -5757,6 +5760,11 @@ body {
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed; }
+
+.page {
+  min-height: 100%; }
+  .page.transparent-bg {
+    border-radius: 20px; }
 
 nav.navbar {
   margin: 0; }

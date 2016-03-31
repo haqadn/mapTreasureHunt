@@ -42,7 +42,7 @@
                 </div>
             </div>
         </nav>
-        <div class="content">
+        <div class="wrapper content">
         @yield( 'content' )
         </div>
     </body>

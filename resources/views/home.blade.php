@@ -9,8 +9,10 @@
 @endsection
 
 @section('content')
-	<div class="transparent-bg content container">
-		<h1 class="text-center">Game starts in...</h1>
-		<div class="row countdown text-center"></div>
+	<div class="transparent-bg content container page">
+		<div style="verticle-aligh:middle">
+			<h1 class="text-center">Game starts in...</h1>
+			<div class="row countdown text-center"></div>
+		</div>
 	</div>
 @endsection

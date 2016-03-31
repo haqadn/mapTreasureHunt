@@ -1,4 +1,8 @@
-jQuery(document).ready(function(){
+jQuery(document).ready(function($){
+
+	/* =======================================================
+		Initiate countdown timer
+	   ======================================================= */
 	$('.countdown').countdown({
 		end_time: "2017/06/21 14:27:28 +0600",
 		show_day: false,
@@ -11,3 +15,14 @@ jQuery(document).ready(function(){
 		}
 	});
 });
+
+
+jQuery(window).on('load resize', function(){
+	var sibling_height = 0;
+	$('.wrapper').siblings().each(function(){
+		sibling_height += $(this).height();
+	});
+	$('.wrapper').css('height', $(window).height() - sibling_height );
+});
+
+//# sourceMappingURL=app.js.map
