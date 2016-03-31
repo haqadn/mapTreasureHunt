@@ -12,6 +12,9 @@
 
         <!-- Bootstrap JS -->
         <script src="asset/js/bootstrap.min.js"></script>
+
+        <!-- Main JS -->
+        <script src="asset/js/app.js"></script>
         @show
 
     </head>
