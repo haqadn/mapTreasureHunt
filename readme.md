@@ -15,7 +15,8 @@ A treasure hunt game with google maps integration. Unlike other online treasure 
 1. Clone the repository.
 2. Run `composer install`
 3. Run `npm install`
-4. Run `gulp`
+4. Run `gulp --production`
+5. Rename _.env.example_ to _.env_ and edit the content to match your configuration.
 
 
 ## License
