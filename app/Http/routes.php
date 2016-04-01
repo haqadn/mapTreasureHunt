@@ -29,4 +29,5 @@ Route::group(['middleware' => ['web']], function () {
         return view('help');
     })->name('help');
 
+    Route::auth();
 });

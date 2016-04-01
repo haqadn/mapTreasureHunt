@@ -39,6 +39,7 @@
                         <li class="{{active_class('ranklist')}}"><a href="{{ route('ranklist') }}">{{ trans( 'pages.ranklist' ) }}</a></li>
                         <li class="{{active_class('help')}}"><a href="{{ route('help') }}">{{ trans( 'pages.help' ) }}</a></li>
                     </ul>
+                    @include('auth-action')
                 </div>
             </div>
         </nav>

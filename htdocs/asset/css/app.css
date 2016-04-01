@@ -5796,4 +5796,30 @@ nav.navbar {
   clear: both;
   display: block; }
 
+/* ==================================================
+	Auth Style
+   ================================================== */
+#login {
+  min-width: 250px;
+  padding: 14px 14px 0;
+  overflow: hidden;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white; }
+  #login .help-block {
+    font-size: 12px; }
+  #login .bottom {
+    background-color: rgba(0, 0, 0, 0.7);
+    border-top: 1px solid #ddd;
+    clear: both;
+    padding: 14px; }
+  #login .form-group {
+    margin-bottom: 10px; }
+  @media (max-width: 768px) {
+    #login {
+      background-color: inherit;
+      color: #000; }
+    #login .bottom {
+      background-color: inherit;
+      border-top: 0 none; } }
+
 /*# sourceMappingURL=app.css.map */
