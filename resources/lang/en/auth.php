@@ -14,9 +14,13 @@ return [
     */
     'login' => 'Login',
     'logout' => 'Logout',
+    'name' => 'Name',
     'email_address' => 'Email address',
     'password' => 'Password',
+    'confirm_password' => 'Confirm Password',
     'forgot_password' => 'Forgot the password ?',
+    'reset_password' => 'Reset Password',
+    'send_pwd_reset_link' => 'Send Password Reset Link',
     'remember' => 'keep me logged-in',
     'new_here' => 'New here ?',
     'join_us' => 'Join Us',
