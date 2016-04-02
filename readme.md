@@ -17,6 +17,9 @@ A treasure hunt game with google maps integration. Unlike other online treasure 
 3. Run `npm install`
 4. Run `gulp --production`
 5. Rename _.env.example_ to _.env_ and edit the content to match your configuration.
+6. Make the directory _storage_ writable.
+7. Run `php artisan key:generate`
+8. Run `php artisan migrate`
 
 
 ## License
