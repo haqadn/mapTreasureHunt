@@ -38,7 +38,7 @@
                     </div>
                     @if(config('app.user_registration'))
                     <div class="bottom text-center">
-                        {{trans('auth.new_here')}} <a href="#"><b>{{trans('auth.join_us')}}</b></a>
+                        {{trans('auth.new_here')}} <a href="{{ url('/register') }}"><b>{{trans('auth.join_us')}}</b></a>
                     </div>
                     @endif
                 </div>
