@@ -15,6 +15,7 @@ return [
     'login' => 'Login',
     'logout' => 'Logout',
     'name' => 'Name',
+    'institute' => 'Institute',
     'email_address' => 'Email address',
     'password' => 'Password',
     'confirm_password' => 'Confirm Password',
