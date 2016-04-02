@@ -5796,6 +5796,14 @@ nav.navbar {
   clear: both;
   display: block; }
 
+.panel {
+  background-color: transparent; }
+  .panel .panel-heading {
+    background-color: #000;
+    color: #FFF; }
+  .panel .panel-body {
+    background-color: rgba(0, 0, 0, 0.7); }
+
 /* ==================================================
 	Auth Style
    ================================================== */
