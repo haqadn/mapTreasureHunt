@@ -13,12 +13,13 @@ return [
     |
     */
     'login' => 'Login',
+    'logout' => 'Logout',
     'email_address' => 'Email address',
     'password' => 'Password',
     'forgot_password' => 'Forgot the password ?',
     'remember' => 'keep me logged-in',
-    'new_here' => "New here ?",
-    'join_us' => "Join Us",
+    'new_here' => 'New here ?',
+    'join_us' => 'Join Us',
     'failed' => 'These credentials do not match our records.',
     'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
 

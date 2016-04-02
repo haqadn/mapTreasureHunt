@@ -39,7 +39,12 @@
                         <li class="{{active_class('ranklist')}}"><a href="{{ route('ranklist') }}">{{ trans( 'pages.ranklist' ) }}</a></li>
                         <li class="{{active_class('help')}}"><a href="{{ route('help') }}">{{ trans( 'pages.help' ) }}</a></li>
                     </ul>
-                    @include('auth-action')
+                    @if(Auth::check())
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a href="{{ url('/logout') }}">{{ trans('auth.logout') }}</a></li>
+                    @else
+                        @include('auth-action')
+                    @endif
                 </div>
             </div>
         </nav>
