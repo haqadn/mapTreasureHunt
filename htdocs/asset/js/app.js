@@ -33,7 +33,9 @@ function initMap() {
 	var modal_call = $('.modal-call').clone();
 	modal_call.removeClass('hidden');
 	map.controls[google.maps.ControlPosition.TOP_RIGHT].push(modal_call[0]);
-
+	google.maps.event.addDomListener(modal_call[0], 'click', function() {
+		$('.modal').modal('show');
+	});
 
 	var markers = [];
 	// Listen for the event fired when the user selects a prediction and retrieve
@@ -110,8 +112,7 @@ function initMap() {
 
 			hint_marker.addListener('click', function(){
 				$('.modal').modal('show').find('.modal-body').html('<p>Hello World!</p>');
-				console.log('Yeah');
-			})
+			});
 
 			hint_visible = true;
 		});
@@ -139,7 +140,6 @@ jQuery(document).ready(function($){
 			}
 		});
 	}
-
 
 });
 

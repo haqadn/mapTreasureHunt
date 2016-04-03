@@ -20,20 +20,48 @@ Route::group(['middleware' => ['web']], function () {
     })->name('home');
 
     Route::get('game', function () {
+        $user = Auth::id();
+        $player_started = DB::table('game_log')->where('user', '=', $user)->count();
+        if( !$player_started ){
+            DB::table('game_log')->insert(
+                [
+                    'user' => $user,
+                    'location' => DB::table('locations')->select('id')->where('order', '=', 0)->first()->id
+                ]
+            );
+        }
         return view('game');
     })->name('game')->middleware('auth');
 
     Route::get('location', function () {
+        $user = Auth::id();
         if (!Request::ajax()) return [];
 
-        $chhatak = ['lat' => 25.0387, 'lng' => 91.67];
+        $location = DB::table('locations')
+            ->where(
+                'id',
+                '=',
+                DB::table('game_log')
+                    ->select('location')
+                    ->where('user', '=', $user)
+                    ->whereNull('end_time')
+                    ->first()
+                    ->location
+                )
+            ->first();
         
         if(
-            is_in_range($chhatak['lat'], Input::get('top'), Input::get('bottom')) &&
-            is_in_range($chhatak['lng'], Input::get('left'), Input::get('right')) &&
-            Input::get('zoom') >= 14
+            is_in_range($location->lat, Input::get('top'), Input::get('bottom')) &&
+            is_in_range($location->lng, Input::get('left'), Input::get('right')) &&
+            Input::get('zoom') >= $location->min_zoom
         ) {
-            return json_encode( ['success' => true, 'coords' => $chhatak ] );
+            return [
+                'success' => true,
+                'coords' => [
+                    'lat' => $location->lat,
+                    'lng' => $location->lng
+                ]
+            ];
         }
     })->name('location');
 
