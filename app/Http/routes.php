@@ -21,7 +21,7 @@ Route::group(['middleware' => ['web']], function () {
 
     Route::get('game', function () {
         return view('game');
-    })->name('game');
+    })->name('game')->middleware('auth');
 
     Route::get('location', function () {
         if (!Request::ajax()) return [];
