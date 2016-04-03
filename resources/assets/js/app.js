@@ -1,3 +1,4 @@
+var hint_visible = false;
 var map;
 function initMap() {
 	$('.pac-container').remove();
@@ -28,6 +29,12 @@ function initMap() {
 	map.controls[google.maps.ControlPosition.TOP_LEFT].push(i);
 
 
+	// Add giney to google map
+	var modal_call = $('.modal-call').clone();
+	modal_call.removeClass('hidden');
+	map.controls[google.maps.ControlPosition.TOP_RIGHT].push(modal_call[0]);
+
+
 	var markers = [];
 	// Listen for the event fired when the user selects a prediction and retrieve
 	// more details for that place.
@@ -43,6 +50,7 @@ function initMap() {
 			marker.setMap(null);
 		});
 		markers = [];
+		hint_visible = false;
 
 		// For each place, get the icon, name and location.
 		var bounds = new google.maps.LatLngBounds();
@@ -72,6 +80,44 @@ function initMap() {
 		});
 		map.fitBounds(bounds);
 	});
+
+	// Scan for treasure after changes made to map bounds
+	map.addListener('idle', function(){
+		if( hint_visible ) return;
+		var location = {
+			top: map.getBounds().getNorthEast().lat(),
+			bottom: map.getBounds().getSouthWest().lat(),
+			left: map.getBounds().getSouthWest().lng(),
+			right: map.getBounds().getNorthEast().lng(),
+			zoom: map.getZoom(),
+		};
+
+		// Request the server with current viewport to see if the target is in the area
+		jQuery.getJSON('/location', location, function(d){
+			if( typeof d.success == 'undefined' || false == d.success ) return;
+			markers = [];
+			var hint_marker = new google.maps.Marker({
+				icon: {
+					url: '/asset/images/message-bottle-icon.png',
+					scaledSize: new google.maps.Size(64, 64)
+				},
+				map: map,
+				title: "ছাতক",
+				position: new google.maps.LatLng(d.coords.lat, d.coords.lng)
+			});
+
+			markers.push(hint_marker);
+
+			hint_marker.addListener('click', function(){
+				console.log(hint_marker.title);
+			})
+
+			hint_visible = true;
+		});
+
+
+
+	})
 }
 
 jQuery(document).ready(function($){

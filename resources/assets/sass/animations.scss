@@ -1,0 +1,20 @@
+@-webkit-keyframes floating {
+	0% {-webkit-transform:translate(0, 0px);}
+	65% {-webkit-transform:translate(0, 15px);}
+	100% {-webkit-transform: translate(0, -0px);}  
+}
+@-moz-keyframes floating {
+	0% {-moz-transform:translate(0, 0px);}
+	65% {-moz-transform:translate(0, 15px);}
+	100% {-moz-transform: translate(0, -0px);}  
+}
+@-o-keyframes floating {
+	0% {transform:translate(0, 0px);}
+	65% {transform:translate(0, 15px);}
+	100% {transform: translate(0, -0px);}
+}
+@keyframes floating {
+	0% {transform:translate(0, 0px);}
+	65% {transform:translate(0, 15px);}
+	100% {transform: translate(0, -0px);}  
+}

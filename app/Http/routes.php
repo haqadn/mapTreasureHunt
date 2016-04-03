@@ -11,6 +11,8 @@
 |
 */
 
+use Illuminate\Support\Facades\Input;
+
 Route::group(['middleware' => ['web']], function () {
 
     Route::get('/', function () {
@@ -20,6 +22,20 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('game', function () {
         return view('game');
     })->name('game');
+
+    Route::get('location', function () {
+        if (!Request::ajax()) return [];
+
+        $chhatak = ['lat' => 25.0387, 'lng' => 91.67];
+        
+        if(
+            is_in_range($chhatak['lat'], Input::get('top'), Input::get('bottom')) &&
+            is_in_range($chhatak['lng'], Input::get('left'), Input::get('right')) &&
+            Input::get('zoom') >= 14
+        ) {
+            return json_encode( ['success' => true, 'coords' => $chhatak ] );
+        }
+    })->name('location');
 
     Route::get('ranklist', function () {
         return view('ranklist');
