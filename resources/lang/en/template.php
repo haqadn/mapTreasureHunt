@@ -13,5 +13,7 @@ return [
     */
     
     'toggle_nav' => 'Toggle Navigation',
-
+    'close' => 'Close',
+    'save' => 'Save Changes',
+    'submit' => 'Submit'
 ];

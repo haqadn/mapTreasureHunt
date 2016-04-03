@@ -109,7 +109,8 @@ function initMap() {
 			markers.push(hint_marker);
 
 			hint_marker.addListener('click', function(){
-				console.log(hint_marker.title);
+				$('.modal').modal('show').find('.modal-body').html('<p>Hello World!</p>');
+				console.log('Yeah');
 			})
 
 			hint_visible = true;

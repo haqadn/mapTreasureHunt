@@ -14,4 +14,5 @@
 @section('content')
 	<div id="map"></div>
 	<img class="modal-call hidden" src="{{ asset('asset/images/game-ask-genie-default.png') }}">
+	@include('modal')
 @endsection

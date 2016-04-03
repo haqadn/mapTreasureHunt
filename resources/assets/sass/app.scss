@@ -85,9 +85,26 @@ nav.navbar {
 }
 
 
+
 /* ==================================================
 	Game Styles
    ================================================== */
+.modal {
+	background-color: transparent;
+	.modal-header, .modal-footer {
+		background-color: #000;
+		color: #FFF;
+		border: none;
+	}
+
+	.modal-body {
+		background-color: $transparent-bg-color;
+	}
+
+	.close {
+		color: #FFF;
+	}
+}
 #map {
 	height: 100%;
 }
