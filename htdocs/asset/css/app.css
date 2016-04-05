@@ -5826,16 +5826,19 @@ nav.navbar {
 /* ==================================================
 	Game Styles
    ================================================== */
-.modal {
+.modal .modal-content {
   background-color: transparent; }
-  .modal .modal-header, .modal .modal-footer {
-    background-color: #000;
-    color: #FFF;
-    border: none; }
-  .modal .modal-body {
-    background-color: rgba(0, 0, 0, 0.7); }
-  .modal .close {
-    color: #FFF; }
+
+.modal .modal-header, .modal .modal-footer {
+  background-color: #000;
+  color: #FFF;
+  border: none; }
+
+.modal .modal-body {
+  background-color: rgba(0, 0, 0, 0.7); }
+
+.modal .close {
+  color: #FFF; }
 
 #map {
   height: 100%; }

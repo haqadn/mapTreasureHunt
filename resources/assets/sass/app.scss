@@ -90,7 +90,9 @@ nav.navbar {
 	Game Styles
    ================================================== */
 .modal {
-	background-color: transparent;
+	.modal-content{
+		background-color: transparent;
+	}
 	.modal-header, .modal-footer {
 		background-color: #000;
 		color: #FFF;
