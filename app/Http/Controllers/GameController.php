@@ -92,11 +92,18 @@ class GameController extends Controller
 
         if( in_array( Input::get('answer'), $answers) ){
 
-            //Store solving record in database
-            DB::table('question_solved_log')->insert([
-                'user' => $user,
-                'question' => $question->id
-            ]);
+            $existing = DB::table('question_solved_log')
+                ->where('user', $user)
+                ->where('question', $question->id)
+                ->count();
+
+            if(!$existing){
+                //Store solving record in database
+                DB::table('question_solved_log')->insert([
+                    'user' => $user,
+                    'question' => $question->id
+                ]);
+            }
             
             // Get next question
             $next_question = DB::table('questions')
@@ -129,8 +136,8 @@ class GameController extends Controller
         $user = Auth::id();
         if (!Request::ajax()) return [];
 
-        $lat = Input::get('lat');
-        $lng = Input::get('lng');
+        $lat = round(Input::get('lat'), 4);
+        $lng = round(Input::get('lng'), 4);
 
         $current_location = DB::table('game_log')
             ->select('location')
@@ -142,7 +149,20 @@ class GameController extends Controller
             ->where('id', $current_location)
             ->first();
 
-        // return print_r( $current_location, 1);
+        //Coordinates sent from user matched what is stored in the database?
+        if(round($current_location->lat, 4) != $lat || round($current_location->lng, 4) != $lng) return [];
+
+        
+        // Check if all questions were answered before approving the location to be done
+        $answered_questions = $this->answeredQuestions();
+
+        $unanswered_questions = DB::table('questions')
+            ->where('location', $current_location->id)
+            ->whereNotIn('id', $answered_questions)
+            ->count();
+
+        if( $unanswered_questions ) return [];
+
 
         $next_location = DB::table('locations')
             ->where('order', '>', $current_location->order)
@@ -165,6 +185,14 @@ class GameController extends Controller
             return "Congratulations, you have found the treasure!";
         }
 
+    }
+
+    public function answeredQuestions(){
+        $user = Auth::id();
+
+        return DB::table('question_solved_log')
+            ->where('user', $user)
+            ->lists('question');
     }
 
     public function actionList(){

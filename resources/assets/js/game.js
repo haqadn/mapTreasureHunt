@@ -107,8 +107,6 @@ function opened_question(marker, i){
 	if(marker.questions[i].solved){
 		if(marker.questions.length > i + 1){
 			show_question(marker, i+1);
-
-
 		}
 		else {
 			show_clue(marker);
