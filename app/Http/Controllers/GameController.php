@@ -3,6 +3,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use Auth;
 use DB;
 use Request;
@@ -21,17 +22,19 @@ class GameController extends Controller
     }
 
     public function getIndex(){
-        $user = Auth::id();
-        $player_started = DB::table('game_log')->where('user', '=', $user)->count();
-        if( !$player_started ){
-            DB::table('game_log')->insert(
-                [
-                    'user' => $user,
-                    'location' => DB::table('locations')->select('id')->where('order', '=', 0)->first()->id
-                ]
-            );
+        $user = Auth::user();
+        if( 'player' == $user->role ){
+            $player_started = DB::table('game_log')->where('user', '=', $user->id)->count();
+            if( !$player_started ){
+                DB::table('game_log')->insert(
+                    [
+                        'user' => $user->id,
+                        'location' => DB::table('locations')->select('id')->where('order', '=', 0)->first()->id
+                    ]
+                );
+            }
+            return view('game')->with('game', $this);
         }
-        return view('game')->with('game', $this);;
     }
 
     public function getLocation(){
@@ -171,8 +174,9 @@ class GameController extends Controller
 
         DB::table('game_log')
             ->where('location', $current_location->id)
+            ->where('user', $user)
             ->update([
-                'end_time' => date('Y-m-d H:i:s')
+                'end_time' => Carbon::now(config('app.timezone'))
                 ]);
 
         if(!is_null($next_location)) {

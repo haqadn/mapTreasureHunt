@@ -21,9 +21,7 @@ Route::group(['middleware' => ['web']], function () {
         'getIndex' => 'game',
     ]);
 
-    Route::get('ranklist', function () {
-        return view('ranklist');
-    })->name('ranklist');
+    Route::get('ranklist', ['uses' => 'RanklistController@getIndex', 'as' => 'ranklist']);
 
     Route::get('help', function () {
         return view('help');
