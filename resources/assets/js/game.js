@@ -12,10 +12,10 @@ function make_hint_marker(d){
 		map: map,
 		position: new google.maps.LatLng(d.lat, d.lng)
 	});
-	console.log("setting marker");
-	console.log(d);
+
+
 	if(typeof(locations[d.id]) != 'undefined'){
-		console.log('marker already exists');
+
 		return;
 	}
 	marker.questions = d.questions;
@@ -33,13 +33,13 @@ function make_hint_marker(d){
 }
 
 function open_marker(marker){
-	console.log(marker.welcome_text);
-	console.log(marker.last);
+
+
 
 	$('.modal .modal-body').html('<p>'+marker.welcome_text+'</p>');
 	$('.modal').modal('show')
 	if(marker.questions.length){
-		console.log( marker.questions.length );
+
 		show_question(marker, 0);
 	}
 	else {
@@ -61,6 +61,7 @@ function opened_clue(marker){
 	jQuery.each(locations, function(i, v){
 		if(loaded) return;
 		if(last_was_key){
+
 			loaded = true;
 			next_clue = v.clue;
 		}
@@ -104,22 +105,20 @@ function show_clue(marker){
 
 function opened_question(marker, i){
 	$('.modal .modal-body').html('').append('<p>'+marker.questions[i].q+'</p>');
-	console.log("clicked next");
-
+	
 	if(marker.questions[i].solved){
 		if(marker.questions.length > i + 1){
 			show_question(marker, i+1);
-			console.log('Showing question');
-			console.log(marker.questions.length);
-			console.log(i);
+
+
 		}
 		else {
 			show_clue(marker);
-			console.log('Showing clue');
+
 		}
 	}
 	else {
-		console.log('Solve the problem');
+
 		var input = $('<input />').addClass('form-control').attr('type', 'text').appendTo($('.modal .modal-body'));
 		$('<div class="alert alert-danger invalid-answer" role="alert">Answer not valid</div>').appendTo('.modal .modal-body').hide();
 		
@@ -152,12 +151,12 @@ function verify_answer(input, marker, question_index){
 			if(d.success){
 				$('.invalid-answer').hide();
 
-				console.log(marker);
-				console.log(locations);
+
+
 
 				locations[marker.index].questions[question_index].solved = true;
 
-				console.log(d);
+
 				if( d.next_question ){
 					locations[marker.index].questions[question_index+1] =  d.next_question;
 					locations[marker.index].questions[question_index+1].solved = false;
@@ -165,7 +164,7 @@ function verify_answer(input, marker, question_index){
 					opened_question(marker, question_index+1);
 				}
 				else {
-					console.log("khulja sim sim");
+
 					opened_clue(marker);
 				}
 			}
@@ -288,13 +287,14 @@ function initMap() {
 
 jQuery(window).on('load', function(){
 	if( 'undefined' != typeof google ){
-		console.log(locations);
+
 		initMap();
 		jQuery.each(locations, function(index, value){
 			locations[index] = make_hint_marker(value);
 		});
 	}
-
-	$('.modal .modal-body').html('<p>'+clue+'</p>');
-	$('.modal').modal('show');
+	if('' != clue){
+		$('.modal .modal-body').html('<p>'+clue+'</p>');
+		$('.modal').modal('show');
+	}
 });
