@@ -34,8 +34,6 @@ function make_hint_marker(d){
 
 function open_marker(marker){
 
-
-
 	$('.modal .modal-body').html('<p>'+marker.welcome_text+'</p>');
 	$('.modal').modal('show')
 	if(marker.questions.length){
@@ -73,7 +71,7 @@ function opened_clue(marker){
 
 	if(!loaded){
 		jQuery.get(
-			'/game/get_next_clue',
+			urls.next_clue,
 			{lat: marker.getPosition().lat(), lng: marker.getPosition().lng()},
 			function(d){
 				next_clue = d;
@@ -142,7 +140,7 @@ function show_question(marker, i){
 
 function verify_answer(input, marker, question_index){
 	jQuery.getJSON(
-		'/game/verify_answer',
+		urls.verify_answer,
 		{
 			qid: marker.questions[question_index].id,
 			answer: input
@@ -269,7 +267,7 @@ function initMap() {
 		};
 
 		// Request the server with current viewport to see if the target is in the area
-		jQuery.getJSON('/game/location', location, function(d){
+		jQuery.getJSON(urls.location, location, function(d){
 			if( typeof d.success == 'undefined' || false == d.success ) return;
 			var marker = make_hint_marker(d)
 			if( !marker ) return;
