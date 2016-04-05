@@ -201,14 +201,6 @@ function initMap() {
 	map.controls[google.maps.ControlPosition.TOP_LEFT].push(i);
 
 
-	// Add giney to google map
-	var modal_call = $('.modal-call').clone();
-	modal_call.removeClass('hidden');
-	map.controls[google.maps.ControlPosition.TOP_RIGHT].push(modal_call[0]);
-	google.maps.event.addDomListener(modal_call[0], 'click', function() {
-		$('.modal').modal('show');
-	});
-
 	var searchMarkers = [];
 	// Listen for the event fired when the user selects a prediction and retrieve
 	// more details for that place.

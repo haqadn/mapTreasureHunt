@@ -1,5 +1,4 @@
 @import "../../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
-@import "animations.scss";
 
 //* ==================================================
 //	Variables
@@ -156,29 +155,6 @@ nav.navbar {
 
 #target {
 	width: 345px;
-}
-
-img.modal-call {
-	max-height: 60%;
-	max-width: 100%;
-	display: block;
-	cursor: pointer;
-	-webkit-animation-name: floating;
-    -webkit-animation-duration: 3s;
-    -webkit-animation-iteration-count: infinite;
-    -webkit-animation-timing-function: ease-in-out;
-	-moz-animation-name: floating;
-    -moz-animation-duration: 3s;
-    -moz-animation-iteration-count: infinite;
-    -moz-animation-timing-function: ease-in-out;
-	-o-animation-name: floating;
-    -o-animation-duration: 3s;
-    -o-animation-iteration-count: infinite;
-    -o-animation-timing-function: ease-in-out;
-	animation-name: floating;
-    animation-duration: 3s;
-    animation-iteration-count: infinite;
-    animation-timing-function: ease-in-out;
 }
 
 
