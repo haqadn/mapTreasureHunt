@@ -6,6 +6,7 @@
   "dependencies": {
     "laravel-elixir": "^4.0.0",
     "bootstrap-sass": "^3.0.0",
-    "jquery": "^1.12"
+    "jquery": "^1.12",
+    "jquery-ui": "^1.10"
   }
 }

@@ -1,5 +1,4 @@
 var elixir = require('laravel-elixir');
-
 /*
  |--------------------------------------------------------------------------
  | Elixir Asset Management
@@ -18,6 +17,7 @@ elixir(function(mix) {
     mix.copy('node_modules/jquery/dist/jquery.min.js', 'htdocs/asset/js/');
     mix.scripts('app.js', 'htdocs/asset/js/');
     mix.scripts('game.js', 'htdocs/asset/js/');
+    mix.scripts('game-admin.js', 'htdocs/asset/js/');
 
     mix.browserSync({
         proxy: 'treasurehunt.sites.dev'

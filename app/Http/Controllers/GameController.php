@@ -35,6 +35,9 @@ class GameController extends Controller
             }
             return view('game')->with('game', $this);
         }
+        elseif( 'admin' == $user->role ){
+            return view('game-admin')->with('game', $this);
+        }
     }
 
     public function getLocation(){
@@ -191,6 +194,63 @@ class GameController extends Controller
 
     }
 
+    public function postConfig(){
+        $user = Auth::user();
+        if( 'admin' != $user->role ) return [];
+
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        DB::table('game_log')->truncate();
+        DB::table('question_solved_log')->truncate();
+        DB::table('questions')->truncate();
+        DB::table('locations')->truncate();
+        DB::table('game_config')->truncate();
+        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+
+        $config = Input::get('config');
+        DB::table('game_config')->insert(['key' => 'starting_time', 'value' => strtotime($config['starting_time'])]);
+        DB::table('game_config')->insert(['key' => 'duration', 'value' => (int) $config['duration']]);
+        DB::table('game_config')->insert(['key' => 'freez_time', 'value' => (int) $config['freez_time']]);
+
+        $locations = Input::get('locations');
+        $order = 0;
+        foreach($locations as $location){
+            $id = DB::table('locations')->insertGetId([
+                'lat' => round($location['lat'], 4),
+                'lng' => round($location['lng'], 4),
+                'min_zoom' => $location['zoom'],
+                'clue' => $location['clue'],
+                'welcome_text' => $location['welcome_text'],
+                'order' => $order++
+                ]);
+
+            $questions = explode("\n", $location['questions']);
+            $question_order = 0;
+            $processed_questions = [];
+            foreach($questions as $question){
+                $parts = explode('|', $question);
+                if( count($parts) != 2 ) continue;
+
+                $q = trim($parts[0]);
+                $a = explode(',', $parts[1]);
+
+                $a = array_map( function($ans){
+                    return trim($ans);
+                }, $a);
+
+                $processed_questions[] = [
+                    'location' => $id,
+                    'order' => $question_order++,
+                    'question' => $q,
+                    'possible_answers' => serialize($a)
+                ];
+
+            };
+
+            DB::table('questions')->insert($processed_questions);
+
+        }
+    }
+
     public function answeredQuestions(){
         $user = Auth::id();
 
@@ -203,7 +263,8 @@ class GameController extends Controller
         return [
             'location' => action('GameController@getLocation'),
             'verify_answer' => action('GameController@getVerifyAnswer'),
-            'next_clue' => action('GameController@getNextClue')
+            'next_clue' => action('GameController@getNextClue'),
+            'config' => action('GameController@postConfig')
         ];
     }
 

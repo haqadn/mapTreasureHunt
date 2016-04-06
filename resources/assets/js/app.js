@@ -24,6 +24,6 @@ jQuery(window).on('load resize', function(){
 	$('.wrapper').siblings('.navbar, .footer').each(function(){
 		sibling_height += $(this).height();
 	});
-	$('.wrapper').css('height', $(window).height() - sibling_height );
+	$('.wrapper').css('min-height', $(window).height() - sibling_height );
 });
 
