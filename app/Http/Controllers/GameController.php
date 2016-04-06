@@ -378,29 +378,6 @@ class GameController extends Controller
             $locations[$question->location]->questions[] = ['id' => $question->id, 'q' => $question->question, 'solved' => true];
         }
 
-        // Add unlocked but unsolved question to the array
-        $unfinished_location = DB::table('game_log')
-            ->where('user', $user)
-            ->whereNull('end_time')
-            ->value('location');
-
-
-        if( !is_null($unfinished_location) && !empty($locations) ){
-            $keys = array_keys($locations);
-            $last_key = end($keys);
-            $locations[$last_key]->solved = false;
-            $unsolved_question = DB::table('questions')
-                ->select('id', 'question')
-                ->where('location', $unfinished_location)
-                ->whereNotIn('id', $solved_questions)
-                ->orderBy('order', 'asc')
-                ->first();
-
-            if(!is_null($unsolved_question))
-                $locations[$last_key]->questions[] = ['id' => $unsolved_question->id, 'q' => $unsolved_question->question, 'solved' => false];
-
-
-        }
 
         // Set if the last loaded location is actually the last one
         if(!empty($locations)){
