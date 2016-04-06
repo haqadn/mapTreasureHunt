@@ -199,7 +199,7 @@ class GameController extends Controller
             return $next_location->clue;
         }
         else {
-            return DB::table('game_config')->where('key', 'final_greeting')->value('value');
+            return htmlentities(DB::table('game_config')->where('key', 'final_greeting')->value('value'));
         }
 
     }

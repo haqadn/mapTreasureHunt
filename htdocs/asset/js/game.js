@@ -88,7 +88,10 @@ function opened_clue(marker){
 
 function show_clue(marker){
 	$('.modal .action-btn').removeClass('hidden');
-	$('.modal .action-btn').text('View Next Clue');
+	if(marker.last)
+		$('.modal .action-btn').text('Finish');
+	else
+		$('.modal .action-btn').text('View Next Clue');
 
 	$('.modal .action-btn').unbind('click');
 	$('.modal .action-btn').click(function(){

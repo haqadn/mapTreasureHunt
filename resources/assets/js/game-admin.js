@@ -162,7 +162,7 @@ jQuery(window).on('load', function(){
 
 
 		jQuery.each(data.locations, function(k, v){
-			placeMarker({lat:parseFloat(v.lat), parseFloat(lng:v.lng)}, v);
+			placeMarker({lat:parseFloat(v.lat), lng:parseFloat(v.lng)}, v);
 		});
 	}
 });

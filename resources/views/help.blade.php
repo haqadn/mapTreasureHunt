@@ -22,6 +22,7 @@
 				<li>If at least three teams are not able to find the treasure, winners will be decided by number of clues discovered.</li>
 				<li>When two or more teams have same number of clues discovered, time taken to discover the clues will be taken into account.</li>
 				<li>If you don't understand the ranking rules, just keep an eye on the "Leaderboard".</li>
+				<li>Every question accept multiple answers if they are valid. If they are confusing like a person's name, most probably it will also accept a one word answer.</li>
 				<li>You can see all of your opponents progress in the leaderboard.</li>
 				<li>The questions and clues are given in Bengali, you must provide answer in English.</li>
 				<li>You are free to look into web or call someone for answers that you may face during the treasure hunting journey.</li>
