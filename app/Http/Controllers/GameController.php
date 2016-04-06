@@ -23,7 +23,7 @@ class GameController extends Controller
 
     public function getIndex(){
         $user = Auth::user();
-        if( 'player' == $user->role ){
+        if( 'player' == $user->role || 'tester' == $user->role ){
             $now = Carbon::now(config('app.timezone'));
             $start = clone $now;
             $start->timestamp = DB::table('game_config')->where('key', 'starting_time')->value('value');

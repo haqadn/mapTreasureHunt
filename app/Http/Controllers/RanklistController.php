@@ -4,8 +4,9 @@
 namespace App\Http\Controllers;
 
 use DB;
-use Carbon\Carbon;
+use Auth;
 use App\User;
+use Carbon\Carbon;
 use App\Http\Controllers\Controller;
 
 class RanklistController extends Controller
@@ -23,8 +24,8 @@ class RanklistController extends Controller
         $freez = clone $end;
         $freez->subMinutes(DB::table('game_config')->where('key', 'freez_time')->value('value'));
 
+
         $users = DB::table('users')
-            ->where('users.role', 'player')
             ->join('game_log', function( $join ) use ($freez){
                 $join->on('users.id', '=', 'game_log.user')
                     ->whereNotNull('game_log.end_time')
@@ -33,8 +34,13 @@ class RanklistController extends Controller
             ->groupBy('game_log.user')
             ->select(DB::raw('users.name as name, users.institute as institute, TIMESTAMPDIFF(MINUTE,\''.$start->toDateTimeString().'\',max(game_log.end_time)) as time, count(*) as passed_locations'))
             ->orderBy('passed_locations', 'desc')
-            ->orderBy('time', 'asc')
-            ->get();
+            ->orderBy('time', 'asc');
+
+        if(!Auth::check() || 'player' == Auth::user()->role)
+            $users = $users
+                ->where('users.role', 'player');
+
+        $users = $users->get();
 
         if(!empty($users)){
         $users[0]->rank = 1;
