@@ -199,7 +199,7 @@ class GameController extends Controller
             return $next_location->clue;
         }
         else {
-            return "Congratulations, you have found the treasure!";
+            return DB::table('game_config')->where('key', 'final_greeting')->value('value');
         }
 
     }
@@ -209,18 +209,22 @@ class GameController extends Controller
         $user = Auth::user();
         if( 'admin' != $user->role ) return [];
 
-        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
-        DB::table('game_log')->truncate();
-        DB::table('question_solved_log')->truncate();
-        DB::table('questions')->truncate();
-        DB::table('locations')->truncate();
         DB::table('game_config')->truncate();
-        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 
         $config = Input::get('config');
         DB::table('game_config')->insert(['key' => 'starting_time', 'value' => strtotime($config['starting_time'])]);
         DB::table('game_config')->insert(['key' => 'duration', 'value' => (int) $config['duration']]);
         DB::table('game_config')->insert(['key' => 'freez_time', 'value' => (int) $config['freez_time']]);
+        DB::table('game_config')->insert(['key' => 'final_greeting', 'value' => $config['final_greeting']]);
+
+        if(Input::get('action') != 'save_all') return;
+
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        DB::table('game_log')->truncate();
+        DB::table('question_solved_log')->truncate();
+        DB::table('questions')->truncate();
+        DB::table('locations')->truncate();
+        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 
         $locations = Input::get('locations');
         $order = 0;

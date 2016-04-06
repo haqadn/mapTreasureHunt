@@ -162,7 +162,7 @@ jQuery(window).on('load', function(){
 
 
 		jQuery.each(data.locations, function(k, v){
-			placeMarker({lat:v.lat, lng:v.lng}, v);
+			placeMarker({lat:parseFloat(v.lat), parseFloat(lng:v.lng)}, v);
 		});
 	}
 });
@@ -191,7 +191,6 @@ jQuery(document).ready(function(){
 });
 
 function save_config(){
-	console.log('clicked');
 	var yes = window.confirm("Sure you want to save? All previous data excluding user accounts will be lost.");
 
 	if( !yes ) return;
@@ -228,7 +227,62 @@ function save_config(){
 	});
 }
 
+function save_all(){
+	var yes = window.confirm("Sure you want to save? All previous data excluding user accounts will be lost.");
 
+	if( !yes ) return;
+
+
+	var conf = {
+		starting_time: $('#starting_time').val(),
+		duration: $('#duration').val(),
+		freez_time: $('#freez_time').val(),
+		final_greeting: $('#final_greeting').val()
+	}
+
+	var locations = [];
+	$('#clues .group').each(function(){
+		var loc = {
+			lat: $(this).find('.lat').val(),
+			lng: $(this).find('.lng').val(),
+			zoom: $(this).find('.zoom').val(),
+			clue: $(this).find('.clue').val(),
+			welcome_text: $(this).find('.welcome-text').val(),
+			questions: $(this).find('.question-answers').val(),
+		}
+
+		locations.push(loc)
+	})
+
+	$('.saving').fadeIn();
+
+	$.post(urls.config, { config: conf, locations: locations, action: 'save_all' }, function(){
+		$('.saving').hide();
+		$('.saved').show();
+		setTimeout(function(){
+			$('.saved').fadeOut();
+		}, 3000);
+	});
+}
+
+function save_config(){
+	var conf = {
+		starting_time: $('#starting_time').val(),
+		duration: $('#duration').val(),
+		freez_time: $('#freez_time').val(),
+		final_greeting: $('#final_greeting').val()
+	}
+
+	$('.saving').fadeIn();
+
+	$.post(urls.config, { config: conf, action: 'save_config' }, function(){
+		$('.saving').hide();
+		$('.saved').show();
+		setTimeout(function(){
+			$('.saved').fadeOut();
+		}, 3000);
+	});
+}
 
 
 
