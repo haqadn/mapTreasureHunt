@@ -37,13 +37,14 @@ function open_marker(marker){
 	$('.modal .modal-body').html('<p>'+marker.welcome_text+'</p>');
 	$('.modal').modal('show')
 	if(marker.questions.length){
-
 		show_question(marker, 0);
 	}
 	else {
 		if(marker.last){
 			$('.modal .action-btn').addClass('hidden');
-			opened_clue(marker)
+			$('.modal .action-btn').click(function(){
+				opened_clue(marker);
+			});
 		}
 		else {
 			show_clue(marker);
