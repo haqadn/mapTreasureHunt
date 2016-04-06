@@ -17,6 +17,7 @@
     
 	<script>
 	var urls = {!! json_encode($game->actionList()) !!}
+	var data = {!! json_encode($game->config()) !!}
 	</script>
 	<script src="{{ asset('asset/js/game-admin.js') }}"></script>
 	<script src="{{ asset('asset/js/jquery-ui.js') }}"></script>

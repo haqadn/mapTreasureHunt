@@ -80,13 +80,24 @@ function initMap() {
 	});
 }
 
-function placeMarker(location, id) {
+function placeMarker(location, old_data) {
+	console.log(old_data)
     var marker = new google.maps.Marker({
         position: location,
     	animation: google.maps.Animation.DROP,
     	draggable:true,
         map: map
     });
+
+    if(typeof old_data == 'undefined'){
+    	old_data = {
+    		id: '',
+    		clue: '',
+    		welcome_text: '',
+    		questions: '',
+    		min_zoom: map.getZoom()
+    	}
+    }
 
     
 
@@ -98,21 +109,22 @@ function placeMarker(location, id) {
 
     $('<input type="hidden" class="lat"/>').appendTo(content).val(marker.getPosition().lat());
     $('<input type="hidden" class="lng"/>').appendTo(content).val(marker.getPosition().lng);
-    $('<input type="hidden" class="id"/>').appendTo(content).val(id);
+    $('<input type="hidden" class="id"/>').appendTo(content).val(old_data.id);
     
-    $('<p/>').appendTo(content).text("Zoom :").append( $('<input type="text" class="zoom"/>').val(map.getZoom()).addClass('form-control')	);
+    $('<p/>').appendTo(content).text("Zoom :").append( $('<input type="text" class="zoom"/>').val(old_data.min_zoom).addClass('form-control')	);
 
     $('<p/>').text('Clue')
-    	.append($('<textarea/>').addClass('form-control clue'))
+    	.append($('<textarea/>').addClass('form-control clue').val(old_data.clue))
     	.appendTo(content);
 
     $('<p/>').text('Welcome Text')
-    	.append($('<textarea/>').addClass('form-control welcome-text'))
+    	.append($('<textarea/>').addClass('form-control welcome-text').val(old_data.welcome_text))
     	.appendTo(content);
 
     $('<p/>').text('Question Answers')
-    	.append($('<textarea/>').addClass('form-control question-answers').attr('placeholder', 'Put in the format "question|ans1,ans2,ans3..." one per line'))
-    	.appendTo(content);
+    	.append($('<textarea/>').addClass('form-control question-answers').val(old_data.questions).attr('placeholder', 'Put in the format "question|ans1,ans2,ans3..." one per line'))
+    	.appendTo(content)
+    	.val(old_data.questions);
 
     $('<button/>')
     	.addClass('btn btn-default delete')
@@ -148,6 +160,10 @@ jQuery(window).on('load', function(){
 
 		initMap();
 
+
+		jQuery.each(data.locations, function(k, v){
+			placeMarker({lat:v.lat, lng:v.lng}, v);
+		});
 	}
 });
 
@@ -167,6 +183,10 @@ jQuery(document).ready(function(){
 			// Refresh accordion to handle new order
 			$( this ).accordion( "refresh" );
 		}
+	});
+
+	jQuery.each(data.config, function(k, v){
+		$('#'+k).val(v);
 	});
 });
 

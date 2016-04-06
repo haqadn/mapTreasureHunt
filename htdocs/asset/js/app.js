@@ -5,7 +5,7 @@ jQuery(document).ready(function($){
 	   ======================================================= */
 	if(typeof $.fn.countdown !== 'undefined'){
 		$('.countdown').countdown({
-			end_time: "2017/06/21 14:27:28 +0600",
+			end_time: ts,
 			show_day: false,
 			wrapper: function( unit ){
 				var wrapper = $('<div class="' + unit.toLowerCase() + '_wrapper col-md-4" />');
@@ -13,6 +13,9 @@ jQuery(document).ready(function($){
 				wrapper.append('<span class="title">' + unit + '</span>');
 
 				return wrapper;
+			},
+			onComplete: function(){
+				location.reload();
 			}
 		});
 	}

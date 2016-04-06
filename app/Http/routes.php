@@ -10,11 +10,18 @@
 | and give it the controller to call when that URI is requested.
 |
 */
+use Carbon\Carbon;
 
 Route::group(['middleware' => ['web']], function () {
 
     Route::get('/', function () {
-        return view('home');
+        $now = Carbon::now(config('app.timezone'));
+        $start = clone $now;
+        $start->timestamp = DB::table('game_config')->where('key', 'starting_time')->value('value');
+        $end = clone $start;
+        $end->addMinutes(DB::table('game_config')->where('key', 'duration')->value('value'));
+
+        return view('home')->with(['start' => $start, 'end' => $end, 'now' => $now]);
     })->name('home');
 
     Route::controller('game', 'GameController', [

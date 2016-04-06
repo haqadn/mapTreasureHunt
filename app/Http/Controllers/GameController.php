@@ -24,6 +24,15 @@ class GameController extends Controller
     public function getIndex(){
         $user = Auth::user();
         if( 'player' == $user->role ){
+            $now = Carbon::now(config('app.timezone'));
+            $start = clone $now;
+            $start->timestamp = DB::table('game_config')->where('key', 'starting_time')->value('value');
+            $end = clone $start;
+            $end->addMinutes(DB::table('game_config')->where('key', 'duration')->value('value'));
+
+
+            if(!$now->between($start, $end) || !DB::table('locations')->count()) return redirect('/');
+
             $player_started = DB::table('game_log')->where('user', '=', $user->id)->count();
             if( !$player_started ){
                 DB::table('game_log')->insert(
@@ -33,6 +42,7 @@ class GameController extends Controller
                     ]
                 );
             }
+
             return view('game')->with('game', $this);
         }
         elseif( 'admin' == $user->role ){
@@ -194,6 +204,7 @@ class GameController extends Controller
 
     }
 
+
     public function postConfig(){
         $user = Auth::user();
         if( 'admin' != $user->role ) return [];
@@ -249,6 +260,40 @@ class GameController extends Controller
             DB::table('questions')->insert($processed_questions);
 
         }
+    }
+
+    public function config(){
+
+        $locations = DB::table('locations')->get();
+        $processed_locations = [];
+        foreach($locations as $location){
+            $questions = DB::table('questions')->where('location', $location->id)->get();
+            $processed_questions = [];
+
+            foreach($questions as $question){
+                $ans = implode(',', unserialize($question->possible_answers));
+                $processed_questions[] = $question->question . '|' . $ans;
+            }
+            $questions = implode("\n", $processed_questions);
+
+            $location->questions = $questions;
+            $processed_locations[] = $location;
+        }
+
+        $config = DB::table('game_config')->select('key', 'value')->get();
+        $configuration = [];
+        foreach($config as $conf){
+            $configuration[$conf->key] = $conf->value;
+        }
+
+        $starting_time = Carbon::now(config('app.timezone'));
+        $starting_time->timestamp = $configuration['starting_time'];
+        $configuration['starting_time'] = $starting_time->toDateTimeString();
+
+        return [
+            'config' => $configuration,
+            'locations' => $locations
+        ];
     }
 
     public function answeredQuestions(){
