@@ -4,14 +4,14 @@
 
 @section('scripts')
 	
+
+	@parent
 	<script>
 	var urls = {!! json_encode($game->actionList()) !!}
 	var locations = {!! json_encode($game->outputLocations()) !!};
-	var clue = "{{ $game->nextClue() }}";
+	var clue = jQuery('<div/>').html({!! json_encode($game->nextClue()) !!}).text();
 	var map_center = {!! json_encode( $game->mapCenter() ) !!};
 	</script>
-
-	@parent
 	<script src="{{ asset('asset/js/game.js') }}"></script>
 
 	<!-- Google MAPS API -->

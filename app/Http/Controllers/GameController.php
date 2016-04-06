@@ -287,7 +287,7 @@ class GameController extends Controller
         }
 
         $starting_time = Carbon::now(config('app.timezone'));
-        $starting_time->timestamp = $configuration['starting_time'];
+        $starting_time->timestamp = isset( $configuration['starting_time'] )?$configuration['starting_time']:time();
         $configuration['starting_time'] = $starting_time->toDateTimeString();
 
         return [
