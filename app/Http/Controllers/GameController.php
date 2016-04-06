@@ -106,7 +106,7 @@ class GameController extends Controller
 
         $answers = (array) unserialize($question->possible_answers);
 
-        if( in_array( Input::get('answer'), $answers) ){
+        if( in_array( strtolower(Input::get('answer')), $answers) ){
 
             $existing = DB::table('question_solved_log')
                 ->where('user', $user)
