@@ -23,6 +23,10 @@
 			@elseif($end->gt($now))
 			<h1 class="text-center">Time Left</h1>
 			<div class="row countdown text-center"></div>
+			<div class="text-center">
+				<br>
+				<a class="btn btn-primary" href="{{route('game')}}">Enter Game</a>
+			</div>
 			@else
 			<h1 class="text-center">Time Up!</h1>
 			@endif
