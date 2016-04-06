@@ -75,20 +75,14 @@ function opened_clue(marker){
 			urls.next_clue,
 			{lat: marker.getPosition().lat(), lng: marker.getPosition().lng()},
 			function(d){
-				next_clue = d;
 				new_hint_visible = false;
-				$('.modal').modal('show').find('.modal-body').html('<p>'+d+'</p>');
-
-				$('.modal .action-btn').click(function(){
-					$('.modal .modal-body').html('').append('<p>'+next_clue+'</p>');
-					$('.modal .action-btn').addClass('hidden');
-				})
+				$('.modal').modal('show').find('.modal-body').html($('<div/>').html(d).text());
 			}
 		);
 	}
 	else {
-			$('.modal .modal-body').html('').append('<p>'+next_clue+'</p>');
-			$('.modal .action-btn').addClass('hidden');
+		$('.modal .modal-body').html('').append(next_clue);
+		$('.modal .action-btn').addClass('hidden');
 	}
 }
 

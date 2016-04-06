@@ -166,7 +166,7 @@ class GameController extends Controller
             ->first();
 
         //Coordinates sent from user matched what is stored in the database?
-        if(round($current_location->lat, 4) != $lat || round($current_location->lng, 4) != $lng) return [];
+        if(round($current_location->lat, 4) != $lat || round($current_location->lng, 4) != $lng) return $this->nextClue();
 
         
         // Check if all questions were answered before approving the location to be done
@@ -177,7 +177,7 @@ class GameController extends Controller
             ->whereNotIn('id', $answered_questions)
             ->count();
 
-        if( $unanswered_questions ) return [];
+        if( $unanswered_questions ) return $this->nextClue();
 
 
         $next_location = DB::table('locations')
