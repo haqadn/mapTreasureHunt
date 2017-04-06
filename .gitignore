@@ -9,3 +9,5 @@ Homestead.json
 config.codekit
 .sass-cache
 .npm-debug.log
+.idea
+public
